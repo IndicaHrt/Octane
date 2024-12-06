@@ -9,7 +9,7 @@ module.exports = {
         .setName('cooldowns')
         .setDescription('Check and refresh the cooldowns for your next daily and weekly rewards.'),
     category: 'General',
-    async execute(interaction) {
+    async execute(interaction, guildSettings, client) {
         let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
 
@@ -21,32 +21,45 @@ module.exports = {
             const now = DateTime.now().setZone('America/New_York');
             await resetLuckyTokens(profile);
             const embed = await buildCooldownEmbed(profile, now);
-            const row = new ActionRowBuilder()
-                .addComponents(
-                    new ButtonBuilder()
-                        .setCustomId('refresh_cooldowns')
-                        //.setLabel(':arrows_counterclockwise:')
-                        .setStyle(ButtonStyle.Secondary)
-                        .setEmoji('🔄')
-                        .setDisabled(false)
-                );
 
-            const message = await interaction.reply({ embeds: [embed], components: [row], fetchReply: true });
+            const rows = [
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId('execute_afk')
+                    .setLabel('AFK')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId('execute_daily')
+                    .setLabel('Daily')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId('execute_weekly')
+                    .setLabel('Weekly')
+                    .setStyle(ButtonStyle.Primary)
+            ),
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId('execute_work')
+                    .setLabel('Work')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId('race_menu')
+                    .setLabel('Race')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId('execute_refuel')
+                    .setLabel('Refuel')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId('execute_lottery')
+                    .setLabel('Lottery')
+                    .setStyle(ButtonStyle.Primary)
+            )];
 
-            const filter = i => i.customId === 'refresh_cooldowns' && i.user.id === interaction.user.id;
-            const collector = interaction.channel.createMessageComponentCollector({ filter, time: 30000 }); // 30 seconds to listen
-
-            collector.on('collect', async i => {
-                if (i.customId === 'refresh_cooldowns') {
-                    i.deferUpdate();
-                    await new Promise(resolve => setTimeout(resolve, 30000)); // Disable for 30 seconds
-                    const newEmbed = await buildCooldownEmbed(profile, DateTime.now().setZone('America/New_York'));
-                    i.editReply({ embeds: [newEmbed], components: [row.setComponents(row.components[0].setDisabled(true))] });
-                    setTimeout(async () => {
-                        row.setComponents(row.components[0].setDisabled(false));
-                        await i.editReply({ components: [row] });
-                    }, 30000);
-                }
+            const message = await interaction.reply({
+                embeds: [embed],
+                components: rows,
+                fetchReply: true,
             });
         } catch (error) {
             logger.error(interaction.user.tag + ' | cooldowns: ' + error);
@@ -134,7 +147,7 @@ async function buildCooldownEmbed(profile, now) {
     return new EmbedBuilder()
         .setColor('#00ff00')
         .setTitle(`Your Cooldowns`)
-        .setDescription(`**AFK Rewards**\n${afkCooldown}\n\n**Daily**\n${dailyResetString}\n\n**Weekly**\n${weeklyResetString}`)
+        .setDescription(`**AFK Rewards**\n${afkCooldown}\n\n**Daily**\n${dailyResetString}\n\n**Weekly*\n${weeklyResetString}`)
         .addFields(
             { name: '\u200B', value: '\u200B' },
             { name: 'Work', value: `${workCooldown}`, inline: false },

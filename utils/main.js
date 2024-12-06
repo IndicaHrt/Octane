@@ -344,7 +344,7 @@ const generateVehiclestats = async (profile, vehicle) => {
     const totalPower = (speed + acceleration + grip + suspension + brakes + aero + torque + horsepower);
     const playerPower = totalPower + profile.level;
 
-    logger.debug(`generateVehiclestats: ${vehicle.year} ${vehicle.make} ${vehicle.model} | Total Power: ${totalPower} | Speed: ${speed} | Accel: ${acceleration} | Grip: ${grip} | Suspension: ${suspension} | Brakes: ${brakes} | Torque: ${torque} | Horsepower: ${horsepower} | Aero: ${aero} | Player Power: ${playerPower}`);
+    //logger.debug(`generateVehiclestats: ${vehicle.year} ${vehicle.make} ${vehicle.model} | Total Power: ${totalPower} | Speed: ${speed} | Accel: ${acceleration} | Grip: ${grip} | Suspension: ${suspension} | Brakes: ${brakes} | Torque: ${torque} | Horsepower: ${horsepower} | Aero: ${aero} | Player Power: ${playerPower}`);
 
     return {
         totalPower,

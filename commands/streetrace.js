@@ -43,7 +43,7 @@ module.exports = {
                 const result = await simulateRace(profile, aiVehicle, aiLevel);
 
                 let rewardsMessage = 'Well, you didn\'t lose your car at least.';
-                const rewards = await calculateRewards(profile, result, aiLevel, isNextLevel, interaction);
+                const rewards = await calculateRewards(profile, result, aiLevel, isNextLevel, interaction, playerVehicle);
                 if (result) {
                     rewardsMessage = `${rewards.coinsEarned} <:coins:1269411594685644800>\n\n${rewards.xpEarned} XP${rewards.bonusMessage}`;
                 }
@@ -156,22 +156,22 @@ async function simulateRace(profile, opponent, aiLevel) {
     return result;   
 }
 
-async function calculateRewards(profile, result, aiLevel, isNextLevel, i) {
+async function calculateRewards(profile, result, aiLevel, isNextLevel, i, playerVehicle) {
     let logger = await getLogger();
     await updateBooster(profile);
     let fuelCost = 25;
     let bonusMessage = '!';
     let coinsEarned = 0;
     let xpEarned = 0;
-    let aiBonus = 0;
+    let aiBonus = 1;
     const xpBooster = profile.booster.xp || 1.0;
     const coinsBooster = profile.booster.coins || 1.0;
     const firstBossWin = aiLevel != profile.streetRaceStats.highestBossWin;
     if (result) {
         if (aiLevel % 10 === 0) {
-            aiBonus = aiLevel * 0.2;
+            aiBonus = aiLevel * 0.2; // 3 
         }
-    
+        console.log(`AI Bonus: ${aiBonus}`);
         const minCoins = aiBonus * 200;
         const maxCoins = aiBonus * 350;
         coinsEarned = Math.floor((Math.random() * (maxCoins - minCoins + 1) + minCoins) * coinsBooster);
@@ -187,7 +187,7 @@ async function calculateRewards(profile, result, aiLevel, isNextLevel, i) {
         profile.streetRaceCount += 1;
         profile.streetRaceStats.wins += 1;
         profile.streetRaceStats.lastRaceDate = DateTime.now().setZone('America/New_York').toJSDate();
-        //playerVehicle.stats.currentFuel -= fuelCost;
+        playerVehicle.stats.currentFuel -= fuelCost;
         if (isNextLevel) {
             profile.streetRaceStats.highestLevelUnlocked++;
         }

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { giveXP, giveCoins, passiveRefuel, updateChallenge, rewardsTable } = require('../utils/main');
+const { giveXP, giveCoins, updateChallenge, rewardsTable } = require('../utils/main');
 const { DateTime } = require('luxon');
 const { getLogger } = require('../utils/logging');
 const { Profile, Job } = require('../models');
@@ -37,8 +37,7 @@ module.exports = {
             if (diff < 20) {
                 return interaction.reply('You are still tired from your last job. Please wait a bit.');
             }
-        } 
-        await passiveRefuel(profile);
+        }
 
         try {
             const jobData = await Job.findById(profile.job).populate('positions');
