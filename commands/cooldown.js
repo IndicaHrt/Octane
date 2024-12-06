@@ -136,7 +136,7 @@ async function buildCooldownEmbed(profile, now) {
     supplyRuns.forEach(async (run) => {
         if (run.state === 'Ready to Collect') {
             supplyRunCooldown += `:white_check_mark: [${runNumber}] Ready to Collect\n`;
-        } else if (run.state === 'In Progress') {
+        } else if (run.state === 'In Progress' && DateTime.fromJSDate(run.endTime) > now) {
             supplyRunCooldown += `:no_entry: [${runNumber}] ${DateTime.fromJSDate(run.endTime).diff(now).toFormat("hh 'hours', mm 'minutes")} remaining\n`;
         } else {
             supplyRunCooldown += `:white_check_mark: [${runNumber}] Available\n`;
@@ -147,7 +147,7 @@ async function buildCooldownEmbed(profile, now) {
     return new EmbedBuilder()
         .setColor('#00ff00')
         .setTitle(`Your Cooldowns`)
-        .setDescription(`**AFK Rewards**\n${afkCooldown}\n\n**Daily**\n${dailyResetString}\n\n**Weekly*\n${weeklyResetString}`)
+        .setDescription(`**AFK Rewards**\n${afkCooldown}\n\n**Daily**\n${dailyResetString}\n\n**Weekly**\n${weeklyResetString}`)
         .addFields(
             { name: '\u200B', value: '\u200B' },
             { name: 'Work', value: `${workCooldown}`, inline: false },

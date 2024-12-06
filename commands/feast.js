@@ -101,7 +101,7 @@ module.exports = {
                     });
                     await profile.save();
 
-                    const rewardsMessage = bonusRewards > 0 ? `You collected ${totalRewards}x Feast Supplies and received ${bonusRewards}x Tier 2 Coupons.` : `You collected ${totalRewards}x Feast Supplies.`;
+                    const rewardsMessage = bonusRewards > 0 ? `You collected ${totalRewards}x Feast Supplies and received ${bonusRewards}x Tier 2 Coupon(s).` : `You collected ${totalRewards}x Feast Supplies.`;
                     
                     e = await generateEmbed(profile);
                     await i.update({ content: `${rewardsMessage}`, embeds: [e.embed], components: e.rows, fetchReply: true });
