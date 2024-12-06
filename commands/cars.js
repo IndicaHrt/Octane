@@ -6,8 +6,8 @@ const { getDealerEmbed } = require('../utils/getEmbed');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('dealer')
-        .setDescription('View and buy cars for sale at the shop.'),
+        .setName('cars')
+        .setDescription('View and buy the stock of cars.'),
     category: 'Economy',
     async execute(interaction) {
         let logger = await getLogger();
@@ -61,6 +61,8 @@ module.exports = {
                     
                         profile.coins -= car.price;
                         profile.vehicles.push(car);
+                        // Set the first car as active and the rest as inactive
+                        profile.vehicles.forEach((v, index) => v.isActive = index === 0);
                         await profile.save();
                         await interaction.editReply({ content: `You have purchased the ${car.make} ${car.model}.`, embeds: [], components: [], files: [] });
                         collector.stop();

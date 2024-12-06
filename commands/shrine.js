@@ -249,7 +249,7 @@ module.exports = {
                     await updateStats(profile);
 
                     e = await getShrineEmbed(profile);
-                    await i.update({ content: `You received a blessing: ${blessing.type}!`, embeds: [e.embed], components: e.rows, fetchReply: true });
+                    await i.update({ content: `You received a blessing: **${blessing.type}**!`, embeds: [e.embed], components: e.rows, fetchReply: true });
                 }
             });
 

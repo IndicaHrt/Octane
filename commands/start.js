@@ -66,7 +66,7 @@ module.exports = {
                                 { name: 'Free Vehicle', value: `You have received a free ${vehicle.make} ${vehicle.model}!` },
                                 { name: 'Get Started', value: 'Use `/race` to start racing immediately' },
                                 { name: 'Check Profile', value: 'Use `/profile` to view your profile and stats' },
-                                { name: 'Buy Vehicles', value: 'Use `/dealer` to buy new vehicles' },
+                                { name: 'Buy Vehicles', value: 'Use `/cars` to view all vehicles' },
                                 { name: 'Check Cooldowns', value: 'Use `/cooldowns` to view your cooldowns' }
                             )
                             .setFooter({ text: 'Type /help for a command list and more information' });

@@ -34,8 +34,9 @@ module.exports = {
                 { name: 'Players', value: `${profilesCount.toLocaleString()}`, inline: true },
                 { name: 'Servers', value: `${client.guilds.cache.size.toLocaleString()}`, inline: true },
                 { name: 'Commands', value: `${commandCount.toLocaleString()}`, inline: true },
-                { name: 'Developer', value: `<@${devID}>`, inline: true },
-                { name: 'Links', value: `[Invite Octane to your server](${botInvite})\n[Join the Dev server](${devInviteURL})`, inline: true }
+                { name: 'Developers', value: `<@${devID}>`, inline: true },
+                //{ name: 'Links', value: `[Invite Octane to your server](${botInvite})\n[Join the Dev server](${devInviteURL})`, inline: true }
+                { name: 'Links', value: `~~[Invite Octane to your server]~~\n*Invites disabled during beta testing*\n[Join the Dev server](${devInviteURL})`, inline: true }
                 )
                 .setFooter({ text: `Uptime: ${uptime} | ${botVersion}`});
             

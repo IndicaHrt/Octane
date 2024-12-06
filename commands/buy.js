@@ -71,7 +71,8 @@ module.exports = {
                     { name: 'Item', value: itemDetails.name, inline: true },
                     { name: 'Quantity', value: quantity.toString(), inline: true },
                     { name: 'Total Cost', value: totalCost.toString(), inline: true }
-                ]);
+                ])
+                .setFooter({ text: `Your Coins: ${profile.coins.toLocaleString()}` });
     
             const row = new ActionRowBuilder()
                 .addComponents(
