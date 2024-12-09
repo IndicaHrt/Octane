@@ -88,11 +88,12 @@ module.exports = {
             const collector = message.createMessageComponentCollector({ filter, time: 60000 });
                 
             collector.on('collect', async i => {
+                await i.deferUpdate();
                 if (i.customId === 'confirm_purchase') {
                     await itemPurchase(profile, item, quantity);
-                    await i.update({ content: `You have successfully purchased ${quantity} ${itemDetails.name} for ${itemPrice}`, embeds: [], components: [], ephemeral: true });
+                    await i.editReply({ content: `You have successfully purchased ${quantity} ${itemDetails.name} for ${itemPrice}`, embeds: [], components: [], ephemeral: true });
                 } else if (i.customId === 'cancel_purchase') {
-                    await i.update({ content: 'Purchase cancelled.', embeds: [], components: [], ephemeral: true });
+                    await i.editReply({ content: 'Purchase cancelled.', embeds: [], components: [], ephemeral: true });
                 }
             });
     
