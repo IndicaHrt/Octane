@@ -12,7 +12,6 @@ module.exports = {
     async execute(interaction) {
         let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
-
         //const forSaleCars = await Vehicle.find({ forSale: true }).sort({ id: 1 }).lean();
         const forSaleCars = await Vehicle.find({}).sort({ id: 1 }).lean();
         if (forSaleCars.length === 0) {
@@ -30,7 +29,6 @@ module.exports = {
 
             collector.on('collect', async i => {
                 await i.deferUpdate();
-
                 switch (i.customId) {
                     case 'previous':
                         pageIndex = Math.max(pageIndex - 1, 0);

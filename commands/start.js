@@ -22,18 +22,16 @@ module.exports = {
         }
 
         try {
-            await interaction.deferReply({ ephemeral: true });
-
             let pageIndex = 0;
             let e = await getStartEmbed(interaction, starterCars, pageIndex);
 
-            const message = await interaction.editReply({ content: 'Please select your starter vehicle:', embeds: [e.embed], components: [e.row], files: [e.vehicleImage], fetchReply: true });
+            const message = await interaction.reply({ content: 'Please select your starter vehicle:', embeds: [e.embed], components: [e.row], files: [e.vehicleImage], fetchReply: true });
             
             const filter = i => ['previous', 'next', 'select'].includes(i.customId) && i.user.id === interaction.user.id;
             const collector = message.createMessageComponentCollector({ filter, time: 60000 });
 
             collector.on('collect', async i => {
-
+                await i.deferUpdate();
                 switch (i.customId) {
                     case 'previous':
                         pageIndex = Math.max(pageIndex - 1, 0);
@@ -45,7 +43,7 @@ module.exports = {
                         const vehicle = starterVehicles[pageIndex];
                         try {
                             if (!vehicle) {
-                                await i.update({ content: "Selected vehicle not found.", components: [] });
+                                await i.editReply({ content: "Selected vehicle not found.", components: [] });
                                 return;
                             }
                             profile = await Profile.create({
