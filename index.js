@@ -150,6 +150,10 @@ async function startBot() {
         client.on('interactionCreate', async interaction => {
             const guildSettings = await GuildSettings.findOne({ guildId: interaction.guild.id });
             const profile = await Profile.findOne({ userId: interaction.user.id });
+            let publicCommands = ['help', 'start', 'info'];
+            if (!profile && !publicCommands.includes(interaction.commandName)) {
+                return await interaction.reply({ content: 'You must create a profile first. Type `/start` to begin.', ephemeral: true });
+            }
         
             if (interaction.isCommand()) {
                 const command = client.commands.get(interaction.commandName);
@@ -170,9 +174,6 @@ async function startBot() {
                 }
         
                 try {
-                    if (interaction.user.id !== devID && (command === 'addjob' || command === 'addchallenge' || command === 'additem')) {
-                        return interaction.reply({ content: 'You do not have permission to use this command.', ephemeral: true });
-                    }
                     await command.execute(interaction, guildSettings, client);
                     logger.info(`[${interaction.guild.name}] - ${interaction.user.tag}: ${interaction.commandName}`);
                 } catch (error) {

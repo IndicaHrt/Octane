@@ -11,10 +11,6 @@ module.exports = {
     let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
 
-        if (!profile || profile.vehicles.length === 0) {
-            return interaction.reply({ content: 'You do not own any cars.', ephemeral: true });
-        }
-
         const vehicles = profile.vehicles;
         const embed = new EmbedBuilder()
             .setColor('#00ff00')

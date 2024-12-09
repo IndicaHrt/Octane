@@ -113,12 +113,7 @@ module.exports = {
     category: 'General',
     async execute(interaction) {
     let logger = await getLogger();
-        const profile = await Profile.findOne({ userId: interaction.user.id });
-        if (!profile) {
-            await interaction.reply({ content: "You need to create a profile view shrine.", ephemeral: true });
-            return;
-        }
-        
+        const profile = await Profile.findOne({ userId: interaction.user.id });        
         try {
             if (!profile.blessings || profile.blessings.length === 0) {
                 profile.blessings = [{

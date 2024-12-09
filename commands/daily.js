@@ -13,10 +13,6 @@ module.exports = {
     let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
 
-        if (!profile) {
-            return interaction.reply('You do not have a profile yet.', { ephemeral: true });
-        }
-
         const lastClaimed = DateTime.fromJSDate(profile.lastDaily);
         const now = DateTime.now().setZone('America/New_York');
         const nextClaim = lastClaimed.plus({ days: 1 }).startOf('day');

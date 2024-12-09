@@ -24,11 +24,6 @@ module.exports = {
         let quantity = interaction.options.getInteger('quantity') || 1;
         
         const profile = await Profile.findOne({ userId: interaction.user.id });
-    
-        if (!profile) {
-            await interaction.reply({ content: "You need to create a profile to buy items.", ephemeral: true });
-            return;
-        }
 
         // Item alias mapping
         if (item === 'xp') item = 'booster_xp';

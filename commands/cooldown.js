@@ -13,10 +13,6 @@ module.exports = {
         let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
 
-        if (!profile) {
-            return interaction.reply({ content: 'You do not have a profile yet.', ephemeral: true });
-        }
-
         try {
             const now = DateTime.now().setZone('America/New_York');
             await resetLuckyTokens(profile);

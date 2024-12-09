@@ -13,11 +13,6 @@ module.exports = {
     let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
         const now = DateTime.now().setZone('America/New_York');
-        if (!profile) {
-            await interaction.reply({ content: "You need to create a profile to visit the junkyard.", ephemeral: true });
-            return;
-        }
-
         const count = interaction.options.getInteger('count') || 1;
         if (profile.junkyardPasses < count) {
             return interaction.reply(`You need ${count} Junkyard Pass(es) to visit this many times.`, { ephemeral: true });

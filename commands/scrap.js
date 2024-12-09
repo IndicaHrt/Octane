@@ -11,10 +11,6 @@ module.exports = {
     async execute(interaction) {
     let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
-        if (!profile) {
-            await interaction.reply({ content: "You need to create a profile to scrap parts.", ephemeral: true });
-            return;
-        }
         const scrapParts = profile.inventory.filter(item => item.condition !== "Usable" && item.category === "Part");
         if (scrapParts.length < 1) {
             await interaction.reply({ content: "You don't have any parts to scrap.", ephemeral: true });

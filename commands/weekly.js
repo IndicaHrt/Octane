@@ -12,11 +12,6 @@ module.exports = {
     async execute(interaction) {
     let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
-
-        if (!profile) {
-            return interaction.reply('You do not have a profile yet.', { ephemeral: true });
-        }
-
         const lastClaimed = DateTime.fromJSDate(profile.lastWeekly);
         const now = DateTime.now().setZone('America/New_York');
         const nextClaim = lastClaimed.plus({ weeks: 1 }).startOf('week');

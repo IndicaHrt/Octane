@@ -10,9 +10,6 @@ module.exports = {
     async execute(interaction) {
         let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
-        if (!profile) {
-            return interaction.reply({ content: "Profile not found.", ephemeral: true });
-        }
 
         try {
             // Filter inventory for category 'Part'

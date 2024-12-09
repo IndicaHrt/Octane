@@ -3,6 +3,7 @@ const { Profile } = require('../models');
 const { DateTime } = require('luxon');
 const { giveXP, giveCoins, calculatePassiveIncome } = require('../utils/main');
 const { getLogger } = require('../utils/logging');
+const { checkProfile } = require('../utils/profileUtils');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,10 +13,6 @@ module.exports = {
     async execute(interaction) {
     let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
-
-        if (!profile) {
-            return interaction.reply('You do not have a profile yet.', { ephemeral: true });
-        }
 
         const lastClaimed = DateTime.fromJSDate(profile.lastAFKClaim || new Date());
         const now = DateTime.now().setZone('America/New_York');

@@ -11,9 +11,6 @@ module.exports = {
     async execute(interaction) {
     let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
-        if (!profile) {
-            return interaction.reply({ content: "Profile not found.", ephemeral: true });
-        }
         const items = await Item.find({ enabled: true });
         if (!items || items.length === 0) {
             return interaction.reply({ content: "No items found in the store.", ephemeral: true });

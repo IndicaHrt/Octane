@@ -13,10 +13,6 @@ module.exports = {
         const profile = await Profile.findOne({ userId: interaction.user.id });
         let now = DateTime.now().setZone('America/New_York').toJSDate()
 
-        if (!profile) {
-            return interaction.reply('You do not have a profile yet.', { ephemeral: true });
-        }
-
         try {
             // Initialize supply runs if they are not already
             if (!profile.supplyRuns || profile.supplyRuns.length === 0) {

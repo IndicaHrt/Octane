@@ -29,10 +29,6 @@ module.exports = {
     let logger = await getLogger();
         const now = DateTime.now().setZone('America/New_York');
         const profile = await Profile.findOne({ userId: interaction.user.id });
-        if (!profile) {
-            return interaction.reply('You need a profile to customize it.', { ephemeral: true });
-        }
-
         const backgroundColor = interaction.options.getString('backgroundcolor');
         const borderColor = interaction.options.getString('bordercolor');
         const xpColor = interaction.options.getString('xpcolor');

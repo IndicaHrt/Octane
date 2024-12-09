@@ -13,10 +13,6 @@ module.exports = {
     let logger = await getLogger();
         const profile = await Profile.findOne({ userId: interaction.user.id });
         const now = DateTime.now().setZone('America/New_York');
-        if (!profile) {
-            return interaction.reply('You need to have a car to refuel.');
-        }
-
         const playerVehicle = profile.vehicles.find(v => v.isActive);
         if (!playerVehicle) {
             return interaction.reply('No active vehicle found.');
