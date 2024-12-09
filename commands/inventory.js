@@ -48,7 +48,7 @@ module.exports = {
     
             if (scrappableParts.length > 0) {
                 buttons.push(new ButtonBuilder()
-                    .setCustomId('scrap_items')
+                    .setCustomId('execute_scrap')
                     .setLabel('Scrap Items')
                     .setStyle(ButtonStyle.Secondary)
                     .setEmoji('♻️')

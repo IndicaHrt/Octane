@@ -39,7 +39,7 @@ module.exports = {
                     .setLabel('Work')
                     .setStyle(ButtonStyle.Primary),
                 new ButtonBuilder()
-                    .setCustomId('race_menu')
+                    .setCustomId('execute_race')
                     .setLabel('Race')
                     .setStyle(ButtonStyle.Primary),
                 new ButtonBuilder()

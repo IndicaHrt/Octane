@@ -66,7 +66,7 @@ module.exports = {
 
             const components = [
                 new ActionRowBuilder()
-                    .addComponents(new ButtonBuilder().setCustomId('view_inventory').setLabel('View Inventory').setStyle(ButtonStyle.Primary))
+                    .addComponents(new ButtonBuilder().setCustomId('execute_inventory').setLabel('View Inventory').setStyle(ButtonStyle.Primary))
             ];
     
             await interaction.reply({ embeds: [embed], components: components });

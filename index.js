@@ -185,34 +185,7 @@ async function startBot() {
                     }
                 }
             } else if (interaction.isButton()) {
-                if (interaction.customId === 'scrap_items') {
-                    try {
-                        const command = client.commands.get('scrap');
-                        logger.info(`[${interaction.guild.name}] - ${interaction.user.tag}: ${command.data.name}`);
-                        await command.execute(interaction, guildSettings, client);
-                    } catch (error) {
-                        await interaction.reply({ content: 'Failed to scrap items.', ephemeral: true });
-                        logger.error(interaction.user.tag + ' | scrap_items button: ' + error);
-                    }
-                } else if (interaction.customId === 'view_inventory') {
-                    try {
-                        const command = client.commands.get('inventory');
-                        logger.info(`[${interaction.guild.name}] - ${interaction.user.tag}: ${command.data.name}`);
-                        await command.execute(interaction, guildSettings, client);
-                    } catch (error) {
-                        await interaction.reply({ content: 'Failed to view inventory.', ephemeral: true });
-                        logger.error(interaction.user.tag + ' | view_inventory button: ' + error);
-                    }
-                } else if (interaction.customId === 'race_menu') {
-                    try {
-                        const command = client.commands.get('race');
-                        logger.info(`[${interaction.guild.name}] - ${interaction.user.tag}: ${command.data.name}`);
-                        await command.execute(interaction);
-                    } catch (error) {
-                        await interaction.reply({ content: 'Failed to start streetrace.', ephemeral: true });
-                        logger.error(interaction.user.tag + ' | race_menu: ' + error);
-                    }
-                } else if (interaction.isButton() && interaction.customId.startsWith('toggle_lock_')) {
+                if (interaction.customId.startsWith('toggle_lock_')) {
                     const index = parseInt(interaction.customId.split('_')[2], 10);
                     const profile = await Profile.findOne({ userId: interaction.user.id });
                     //console.log(interaction.customId.split('_'));
@@ -227,61 +200,14 @@ async function startBot() {
             
                     const response = await getShrineEmbed(profile);
                     await interaction.update({ embeds: [response.embed], components: response.rows });
-                } else if (interaction.customId === 'execute_afk') {
+                } else if (interaction.customId.startsWith('execute_')) {
                     try {
-                        const command = client.commands.get('afk');
+                        const command = client.commands.get(interaction.customId.split('_')[1]);
                         logger.info(`[${interaction.guild.name}] - ${interaction.user.tag}: ${command.data.name}`);
                         await command.execute(interaction, guildSettings, client);
                     } catch (error) {
-                        await interaction.reply({ content: 'Failed to go AFK.', ephemeral: true });
-                        logger.error(interaction.user.tag + ' | execute_afk button: ' + error);
-                    }
-                } else if (interaction.customId === 'execute_daily') {
-                    try {
-                        const command = client.commands.get('daily');
-                        logger.info(`[${interaction.guild.name}] - ${interaction.user.tag}: ${command.data.name}`);
-                        await command.execute(interaction, guildSettings, client);
-                    } catch (error) {
-                        await interaction.reply({ content: 'Failed to claim daily reward.', ephemeral: true });
-                        logger.error(interaction.user.tag + ' | execute_daily button: ' + error);
-                    }
-                }
-                else if (interaction.customId === 'execute_weekly') {
-                    try {
-                        const command = client.commands.get('weekly');
-                        logger.info(`[${interaction.guild.name}] - ${interaction.user.tag}: ${command.data.name}`);
-                        await command.execute(interaction, guildSettings, client);
-                    } catch (error) {
-                        await interaction.reply({ content: 'Failed to claim weekly reward.', ephemeral: true });
-                        logger.error(interaction.user.tag + ' | execute_weekly button: ' + error);
-                    }
-                }
-                else if (interaction.customId === 'execute_work') {
-                    try {
-                        const command = client.commands.get('work');
-                        logger.info(`[${interaction.guild.name}] - ${interaction.user.tag}: ${command.data.name}`);
-                        await command.execute(interaction, guildSettings, client);
-                    } catch (error) {
-                        await interaction.reply({ content: 'Failed to work.', ephemeral: true });
-                        logger.error(interaction.user.tag + ' | execute_work button: ' + error);
-                    }
-                } else if (interaction.customId === 'execute_refuel') {
-                    try {
-                        const command = client.commands.get('refuel');
-                        logger.info(`[${interaction.guild.name}] - ${interaction.user.tag}: ${command.data.name}`);
-                        await command.execute(interaction, guildSettings, client);
-                    } catch (error) {
-                        await interaction.reply({ content: 'Failed to refuel.', ephemeral: true });
-                        logger.error(interaction.user.tag + ' | execute_refuel button: ' + error);
-                    }
-                } else if (interaction.customId === 'execute_lottery') {
-                    try {
-                        const command = client.commands.get('lottery');
-                        logger.info(`[${interaction.guild.name}] - ${interaction.user.tag}: ${command.data.name}`);
-                        await command.execute(interaction, guildSettings, client);
-                    } catch (error) {
-                        await interaction.reply({ content: 'Failed to play the lottery.', ephemeral: true });
-                        logger.error(interaction.user.tag + ' | execute_lottery button: ' + error);
+                        await interaction.reply({ content: `Failed to execute ${command}`, ephemeral: true });
+                        logger.error(interaction.user.tag + ` | ${command} button: ` + error);
                     }
                 }
             }

@@ -109,7 +109,7 @@ async function buildRaceEmbed(profile, playerVehicle, result, rewardsMessage) {
     const row = new ActionRowBuilder()
         .addComponents(
             new ButtonBuilder()
-                .setCustomId('race_menu')
+                .setCustomId('execute_race')
                 .setLabel('Race Again')
                 .setStyle(ButtonStyle.Primary)
     );
