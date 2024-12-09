@@ -21,9 +21,9 @@ async function startup () {
 
         const logger = await getLogger();
 
-        //await resetDailies(logger);
+        await resetDailies(logger);
 
-        await updateProfileVehicleIds(logger);
+        //await updateProfileVehicleIds(logger);
         
         //await updateVehicleData(logger);
         //await updateAllPlayerVehicleStats(logger);
@@ -44,9 +44,9 @@ async function resetDailies(logger) {
 
     for (const profile of profiles) {
         let changed = false;
-        if (profile.userId != '102688836454203392') {
-            continue;
-        }
+        //if (profile.userId != '102688836454203392') {
+        //    continue;
+        //}
         for (const challenge of profile.challenges) {
             let challengeData = await Challenge.findOne({ _id: challenge.challengeId, daily: true });
             //logger.info(`\nChallenge Data: ${challengeData.name} | ${challengeData.daily} | ${challengeData.targetCount} | ${challengeData.xpReward} | ${challengeData.coinReward}\nPlayer: ${profile.userId} | ${challenge.progress} | ${challenge.completed} | ${challenge.lastCompleted}`);
