@@ -15,7 +15,7 @@ module.exports = {
         //const forSaleCars = await Vehicle.find({ forSale: true }).sort({ id: 1 }).lean();
         const forSaleCars = await Vehicle.find({}).sort({ id: 1 }).lean();
         if (forSaleCars.length === 0) {
-            await interaction.reply('No cars available for sale that you can afford.');
+            await interaction.reply('No cars available for sale that you can afford.', { ephemeral: true });
             return;
         }
 

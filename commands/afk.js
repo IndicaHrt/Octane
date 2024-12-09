@@ -22,7 +22,7 @@ module.exports = {
 
         if (rewardMultiplier < 1) {
             const timeToNextReward = 5 - minutesSinceLastClaim;
-            return interaction.reply(`You can claim your AFK rewards in ${Math.ceil(timeToNextReward)} minute(s).`);
+            return interaction.reply(`You can claim your AFK rewards in ${Math.ceil(timeToNextReward)} minute(s).`, { ephemeral: true });
         }
 
         const passiveIncome = await calculatePassiveIncome(profile);

@@ -15,7 +15,7 @@ module.exports = {
         const now = DateTime.now().setZone('America/New_York');
         const playerVehicle = profile.vehicles.find(v => v.isActive);
         if (!playerVehicle) {
-            return interaction.reply('No active vehicle found.');
+            return interaction.reply('No active vehicle found.', { ephemeral: true });
         }
 
         if (profile.lastRefuel && now.diff(DateTime.fromJSDate(profile.lastRefuel)).as('minutes') < 30) {
@@ -25,7 +25,7 @@ module.exports = {
         }
 
         if (playerVehicle.stats.currentFuel === playerVehicle.stats.fuelCapacity) {
-            return interaction.reply('Your fuel tank is already full.');
+            return interaction.reply('Your fuel tank is already full.', { ephemeral: true });
         }
 
         const fuelNeeded = playerVehicle.stats.fuelCapacity - playerVehicle.stats.currentFuel;
