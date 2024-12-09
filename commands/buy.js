@@ -7,7 +7,7 @@ const { DateTime } = require('luxon');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('buy')
-        .setDescription('Purchase items from the store')
+        .setDescription('Purchase items from the store. Use /store to see available items.')
         .addStringOption(option => 
             option.setName('item')
                 .setDescription('The ID of the item to buy')
@@ -89,12 +89,16 @@ module.exports = {
                 
             collector.on('collect', async i => {
                 await i.deferUpdate();
+                let msg = 'Purchase session has ended.';
                 if (i.customId === 'confirm_purchase') {
                     await itemPurchase(profile, item, quantity);
-                    await i.editReply({ content: `You have successfully purchased ${quantity} ${itemDetails.name} for ${itemPrice}`, embeds: [], components: [], ephemeral: true });
+                    msg = `You have successfully purchased ${quantity} ${itemDetails.name} for ${itemPrice}`;
                 } else if (i.customId === 'cancel_purchase') {
-                    await i.editReply({ content: 'Purchase cancelled.', embeds: [], components: [], ephemeral: true });
+                    msg = 'Purchase cancelled.';
                 }
+
+                await i.editReply({ content: `${msg}`, embeds: [], components: buttonRows, fetchReply: true, ephemeral: true });
+                collector.stop();
             });
     
         } catch (err) {
