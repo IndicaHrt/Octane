@@ -151,7 +151,8 @@ async function startBot() {
             const guildSettings = await GuildSettings.findOne({ guildId: interaction.guild.id });
             const profile = await Profile.findOne({ userId: interaction.user.id });
             let publicCommands = ['help', 'start', 'info'];
-            if (!profile && !publicCommands.includes(interaction.commandName)) {
+            if (!profile && interaction.isCommand() && !publicCommands.includes(interaction.commandName)) {
+                console.log('Profile not found');
                 return await interaction.reply({ content: 'You must create a profile first. Type `/start` to begin.', ephemeral: true });
             }
         
@@ -160,6 +161,7 @@ async function startBot() {
                 if (!command) return;
         
                 if (guildSettings && guildSettings.allowedChannels.length > 0 && !guildSettings.allowedChannels.includes(interaction.channelId)) {
+                    console.log('Channel not allowed');
                     return await interaction.reply({ content: 'This command is not allowed in this channel.', ephemeral: true });
                 }
         

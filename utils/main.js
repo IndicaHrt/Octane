@@ -157,8 +157,8 @@ const rewardsTable = async (profile) => {
         const xpBooster = prof.booster.xp || 1.0;
         const chatXP = Math.floor(Math.random() * (maxXp - minXp + 1) + minXp) * xpBooster;
         const workXP = Math.floor(Math.random() * (125 - 75 + 1) + 75) * xpBooster;
-        const dailyCoins = levelInfo.level * 100;
-        const weeklyCoins = levelInfo.level * 500;
+        const dailyCoins = levelInfo.level * 100 || 100;
+        const weeklyCoins = levelInfo.level * 500 || 500;
         //logger.debug(`chatXP: ${chatXP}, workXP: ${workXP}, dailyCoins: ${dailyCoins}, weeklyCoins: ${weeklyCoins}`);
         if (isNaN(dailyCoins)) {
             logger.warn('Daily coins calculation resulted in NaN');

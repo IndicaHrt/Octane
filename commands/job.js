@@ -259,7 +259,7 @@ async function listJob(interaction) {
     }
 
     const embed = generateEmbed(0);
-    const message = await interaction.reply({ embeds: [embed], fetchReply: true });
+    const message = await interaction.reply({ content: '*To join a job type /job apply TAG*\n*Example:* `/job apply taco`', embeds: [embed], fetchReply: true });
 
     if (jobs.length <= pageLimit) return;
 
