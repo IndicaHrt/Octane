@@ -1,5 +1,4 @@
-# Octane
-An RPG street racing experience, within Discord. Buy and manage cars, race AI opponents, and more!
+# OctaneRPG
 
 ## Commands, Features, and more!
 - [Visit the bot's wiki page for more info.](https://github.com/IndicaHrt/Octane/wiki)
