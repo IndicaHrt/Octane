@@ -7,3 +7,6 @@
 ## Links
 - Top.gg - https://top.gg/bot/1261549898080452638
 - Dev Server - https://discord.gg/yWEDMWd4AN
+
+
+[![Discord Bots](https://top.gg/api/widget/1261549898080452638.svg)](https://top.gg/bot/1261549898080452638)
