@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security / Exploit report (private)
+    url: dev@octanerpg.com
+    about: Please report exploits or security issues privately.
+  - name: Discord feedback channel
+    url: https://discord.gg/yWEDMWd4AN
+    about: Prefer Discord? Drop quick feedback here, but bugs/features are best as Issues.
