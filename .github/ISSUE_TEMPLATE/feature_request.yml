@@ -1,0 +1,58 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+title: "[Feature]: "
+labels: ["type:feature", "needs:triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      placeholder: "Right now players can’t…"
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your proposed solution
+      placeholder: "Add a /duel command that…"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - bot-commands
+        - events
+        - economy
+        - vehicles
+        - crew/guilds
+        - inventory/items
+        - admin/moderation
+        - dashboard
+        - api/backend
+        - data/db
+        - not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority (your best guess)
+      options:
+        - p3 (nice-to-have)
+        - p2
+        - p1
+        - p0 (urgent)
+    validations:
+      required: true
