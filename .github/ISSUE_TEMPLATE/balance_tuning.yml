@@ -1,0 +1,43 @@
+name: Balance / Tuning
+description: Economy, rewards, risk, progression tuning ideas
+title: "[Balance]: "
+labels: ["type:balance", "needs:triage"]
+body:
+  - type: dropdown
+    id: subsystem
+    attributes:
+      label: Subsystem
+      options:
+        - races
+        - jobs
+        - loot/items
+        - XP/progression
+        - police/heat
+        - events
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: What feels off today?
+      placeholder: "Jobs pay too much compared to races…"
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested change
+      placeholder: "Reduce X by 20% OR increase risk by adding…"
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence (optional)
+      description: Screenshots, rough math, examples.
+    validations:
+      required: false
