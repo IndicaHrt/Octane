@@ -15,7 +15,7 @@
 [![Discord Bots](https://top.gg/api/widget/1261549898080452638.svg)](https://top.gg/bot/1261549898080452638)
 
 ### Welcome to OctaneRPG!
-A discord game unlike any other, offering a gaming experience where players can buy, customize, and race vehicles, level up, participate in multiplayer races, and earn rewards immersed in a growing world
+A Discord-based street racing RPG where you build your empire through cars, upgrades, jobs, crews, challenges, and competitive racing in an ever-growing world!
 
 ## 🟢 Features
 
@@ -29,6 +29,9 @@ A discord game unlike any other, offering a gaming experience where players can 
 * 🔸 Junkyard Looting
 * 🔸 And more!
 
+** Visit the [Wiki](https://github.com/IndicaHrt/Octane/wiki) for more details about commands and features **
+
 The bot is still very new and under development, during this beta phase you may experience profile resets if necessary. Beta testers will receive rewards through resets if they occur.
+
 
 
