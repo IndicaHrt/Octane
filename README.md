@@ -20,13 +20,21 @@ A discord game unlike any other, offering a gaming experience where players can 
 🟢 Features
 
 🔸 Over 20 cars to own and upgrade with various parts!
+
 🔸 Level Progression
+
 🔸 Idle Rewards
+
 🔸 PvE Racing
+
 🔸 PvP Practice Races (Battles coming soon!)
 🔸 Crews
+
 🔸 Minigames
+
 🔸 Junkyard Looting
+
 🔸 And more!
 
 The bot is still very new and under development, during this beta phase you may experience profile resets if necessary. Beta testers will receive rewards through resets if they occur.
+
