@@ -29,9 +29,10 @@ A Discord-based street racing RPG where you build your empire through cars, upgr
 * 🔸 Junkyard Looting
 * 🔸 And more!
 
-** Visit the [Wiki](https://github.com/IndicaHrt/Octane/wiki) for more details about commands and features **
+#### Visit the [Wiki](https://github.com/IndicaHrt/Octane/wiki) for more details about commands and features
 
 The bot is still very new and under development, during this beta phase you may experience profile resets if necessary. Beta testers will receive rewards through resets if they occur.
+
 
 
 
