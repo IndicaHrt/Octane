@@ -1,0 +1,38 @@
+name: Discord Notify - New Issues
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post issue to Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          REPO: ${{ github.repository }}
+        run: |
+          payload=$(jq -n \
+            --arg content "🧾 **New Issue Created** in **$REPO**" \
+            --arg title "#$ISSUE_NUMBER — $ISSUE_TITLE" \
+            --arg url "$ISSUE_URL" \
+            --arg author "$ISSUE_AUTHOR" \
+            '{
+              "content": $content,
+              "embeds": [{
+                "title": $title,
+                "url": $url,
+                "description": ("Opened by **" + $author + "**"),
+                "footer": {"text": "OctaneRPG Tracker"}
+              }]
+            }')
+          
+          curl -s -X POST \
+            -H "Content-Type: application/json" \
+            -d "$payload" \
+            "$DISCORD_WEBHOOK_URL"
